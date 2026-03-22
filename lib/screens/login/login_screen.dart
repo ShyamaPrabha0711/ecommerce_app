@@ -63,12 +63,14 @@ class LoginScreen extends StatelessWidget {
                       return Column(
                         children: [
                           CustomTextField(
+                            controller: loginProvider.emailController,
                             label: AppStrings.emailAddress,
                             hintText: AppStrings.emailHint,
                             onChanged: loginProvider.setEmail,
                           ),
                           20.hBox,
                           CustomTextField(
+                            controller: loginProvider.passwordController,
                             label: AppStrings.password,
                             hintText: AppStrings.passwordHint,
                             isPassword: true,
@@ -98,8 +100,13 @@ class LoginScreen extends StatelessWidget {
                   Consumer<LoginProvider>(
                     builder: (context, loginProvider, child) {
                       return CustomButton(
+                        isEnabled:
+                            loginProvider.emailController.text.isNotEmpty &&
+                            loginProvider.passwordController.text.isNotEmpty,
                         text: AppStrings.login,
-                        onPressed: () {},
+                        onPressed: () {
+                          loginProvider.login();
+                        },
                       );
                     },
                   ),

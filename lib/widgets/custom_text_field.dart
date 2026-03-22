@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final bool isVisible;
   final Function(String)? onChanged;
   final VoidCallback? onToggleVisibility;
+  final TextEditingController controller;
 
   const CustomTextField({
     super.key,
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.isVisible = true,
     this.onChanged,
     this.onToggleVisibility,
+   required this.controller
   });
 
   @override
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
         Text(label, style: AppTextStyles.label),
         10.hBox,
         TextField(
+          controller: controller,
           obscureText: isPassword && !isVisible,
           onChanged: onChanged,
           decoration: InputDecoration(
