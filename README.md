@@ -30,7 +30,7 @@ flutter pub get
 flutter run
 ```
 
-## 🧠 State Management
+##  State Management
 
 This project uses **Provider** for state management.
 
@@ -48,14 +48,14 @@ This project uses **Provider** for state management.
 * `context.watch()` / `Consumer` → used for UI updates
 
 
-## 📦 Features
+##  Features
 
-* 🔐 Login functionality with API integration
-* 🏠 Dynamic home screen with banners and product lists
-* 🎠 Carousel banner using network imagesI
+*  Login functionality with API integration
+*  Dynamic home screen with banners and product lists
+*  Carousel banner using network imagesI
 ---
 
-## 📁 Project Structure (Simplified)
+##  Project Structure (Simplified)
 
 ```
 lib/
@@ -69,7 +69,7 @@ lib/
 ```
 ---
 
-## 🙌 Author
+##  Author
 ---
 Developed as part of a learning/project implementation using Flutter.
 
