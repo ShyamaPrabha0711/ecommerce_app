@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../providers/login_provider.dart';
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_text_styles.dart';
+import '../../widgets/common_snackbar.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -101,12 +102,27 @@ class LoginScreen extends StatelessWidget {
                   Consumer<LoginProvider>(
                     builder: (context, loginProvider, child) {
                       return CustomButton(
+                        isLoading: loginProvider.isLoading,
                         isEnabled:
                             loginProvider.emailController.text.isNotEmpty &&
                             loginProvider.passwordController.text.isNotEmpty,
                         text: AppStrings.login,
-                        onPressed: () {
-                          loginProvider.login();
+                        onPressed: () async {
+                          await loginProvider.login().then((value) {
+                            print("value receiced $value");
+                            if (value) {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ),
+                              );
+                            } else {
+                              SnackbarService.showSnackbar(
+                                "Login Failed",
+                                isError: true,
+                              );
+                            }
+                          });
                         },
                       );
                     },

@@ -42,7 +42,7 @@ class LoginProvider extends ChangeNotifier {
   }
 
   Customerdata? authResponse;
-  Future<void> login() async {
+  Future<bool> login() async {
     _isLoading = true;
     try {
       notifyListeners();
@@ -51,16 +51,20 @@ class LoginProvider extends ChangeNotifier {
         email: emailController.text,
         password: passwordController.text,
       );
+      print("response.success ${response.success}");
       if (response.success != null && response.success == 1) {
         authResponse = response.customerdata;
         await SharedPref().save(key: "userdata", value: response);
         await SharedPref().getUserData();
+        return true;
       } else {
         authResponse = null;
+        return false;
       }
     } catch (e) {
       authResponse = null;
       print("Exception occured while logging $e");
+      return false;
     } finally {
       _isLoading = false;
       notifyListeners();
