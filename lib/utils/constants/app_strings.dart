@@ -21,6 +21,7 @@ class AppStrings {
   static const String profile = 'Profile';
   static const String shopNow = 'Shop Now';
   static const String add = 'Add';
+  static const String homeBanner = 'banner_image';
   static const String goNaturalTitle = 'Go Natural with\nUnpolished Grains';
   static const String goNaturalSubTitle = 'Hurry Up! Get 10% Off';
   static const String powerYourDayTitle =

@@ -1,8 +1,13 @@
+import 'package:ecommerce_app/providers/home_provider.dart';
+import 'package:ecommerce_app/providers/login_provider.dart';
 import 'package:ecommerce_app/utils/extensions/margin_extension.dart';
 import 'package:ecommerce_app/widgets/custom_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../models/home_response.dart';
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_text_styles.dart';
+import '../../utils/constants/constants.dart';
 import '../../widgets/category_item.dart';
 import '../../widgets/home_banner.dart';
 import '../../widgets/home_header.dart';
@@ -15,6 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeProvider = context.watch<HomeProvider>();
+    final banners = homeProvider.homeMainResponse?.banner1 ?? [];
     return Scaffold(
       backgroundColor: AppColors.cardBackground,
       appBar: AppBar(
@@ -42,18 +49,18 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   20.hBox,
-                  const HomeBanner(
-                    subTitle: AppStrings.goNaturalSubTitle,
-                    title: AppStrings.goNaturalTitle,
-                    gradientColors: [
-                      AppColors.bannerGradient1,
-                      AppColors.bannerGradient2,
-                    ],
+
+                  HomeBanner(
+                    imageUrls: banners
+                        .map((e) => "$imageBaseUrl/images/banner/${e.image}")
+                        .toList(),
                   ),
                   20.hBox,
                   _buildSectionHeader(AppStrings.categories),
                   15.hBox,
-                  _buildCategoryList(),
+                  _buildCategoryList(
+                    category: homeProvider.homeMainResponse?.categories ?? [],
+                  ),
                 ],
               ),
             ),
@@ -71,14 +78,7 @@ class HomeScreen extends StatelessWidget {
                   10.hBox,
                   _buildProductList(),
                   20.hBox,
-                  const HomeBanner(
-                    subTitle: AppStrings.powerYourDaySubTitle,
-                    title: AppStrings.powerYourDayTitle,
-                    gradientColors: [
-                      AppColors.bannerGradient3,
-                      AppColors.bannerGradient4,
-                    ],
-                  ),
+                  AppImage(assetName: AppStrings.homeBanner),
                   20.hBox,
                   _buildSectionHeader(AppStrings.recentlyAdded),
                   10.hBox,
@@ -123,37 +123,19 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryList() {
-    final categories = [
-      {
-        'title': AppStrings.unpolishedPulses,
-        'url': 'https://api.placeholder.com/150',
-      },
-      {
-        'title': AppStrings.unpolishedRice,
-        'url': 'https://api.placeholder.com/150',
-      },
-      {
-        'title': AppStrings.unpolishedMillets,
-        'url': 'https://api.placeholder.com/150',
-      },
-      {
-        'title': AppStrings.nutsAndDryFruits,
-        'url': 'https://api.placeholder.com/150',
-      },
-    ];
-
+  Widget _buildCategoryList({required List<CategoryElement> category}) {
     return SizedBox(
       height: 120,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: category!.length,
         separatorBuilder: (context, index) => const SizedBox(width: 20),
         itemBuilder: (context, index) {
           return CategoryItem(
-            title: categories[index]['title']!,
-            imageUrl: categories[index]['url']!,
+            title: category[index].category?.name ?? '',
+            imageUrl:
+                "$imageBaseUrl/images/category/${category[index].category!.image}",
           );
         },
       ),
@@ -169,12 +151,12 @@ class HomeScreen extends StatelessWidget {
         itemCount: 4,
         separatorBuilder: (context, index) => const SizedBox(width: 16),
         itemBuilder: (context, index) {
-          return const ProductCard(
-            name: AppStrings.lightPinkSalt,
+          return ProductCard(
+            name: "name",
             category: AppStrings.flourAndSugars,
             price: 62.00,
             oldPrice: 80.00,
-            imageUrl: 'https://api.placeholder.com/200',
+            imageUrl: "https",
           );
         },
       ),
