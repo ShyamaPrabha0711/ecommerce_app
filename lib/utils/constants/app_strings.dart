@@ -1,4 +1,5 @@
 class AppStrings {
+  static const String appName = 'Ecommerce App';
   static const String loginBg = 'login_bg';
   static const String skip = 'Skip';
   static const String login = 'Login';
@@ -9,4 +10,31 @@ class AppStrings {
   static const String forgotPassword = 'Forgot password?';
   static const String dontHaveAccount = "Don't Have an account? ";
   static const String signUp = 'Sign Up';
+  static const String categories = 'Categories';
+  static const String featuredProducts = 'Featured Products';
+  static const String dailyBestSelling = 'Daily Best Selling';
+  static const String recentlyAdded = 'Recently Added';
+    static const String popularProducts = 'Popular Products';
+      static const String trendingProducts = 'Trending Products';
+  static const String home = 'Home';
+  static const String cart = 'Cart';
+  static const String profile = 'Profile';
+  static const String shopNow = 'Shop Now';
+  static const String add = 'Add';
+  static const String goNaturalTitle = 'Go Natural with\nUnpolished Grains';
+  static const String goNaturalSubTitle = 'Hurry Up! Get 10% Off';
+  static const String powerYourDayTitle =
+      'Power Your Day\nwith Nuts & Dry Fruits';
+  static const String powerYourDaySubTitle = 'Hurry Up! Get 10% Off';
+  static const String unpolishedPulses = 'Unpolished Pulses';
+  static const String unpolishedRice = 'Unpolished Rice';
+  static const String unpolishedMillets = 'Unpolished Millets';
+  static const String nutsAndDryFruits = 'Nuts & Dry Fruits';
+  static const String lightPinkSalt = 'Light pink salt 1 kg';
+  static const String flourAndSugars = 'Flour & Sugars';
+  static const String cartIcon = 'cart_image';
+  static const String favrtIcon = 'favrt_icon';
+  static const String searchIcon = 'search_icon';
+  static const String bellIcon = 'bell_icon_not';
+  static const String cartIconSmall = 'cart_icon';
 }

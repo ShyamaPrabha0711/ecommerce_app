@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/screens/home/home_screen.dart';
 import 'package:ecommerce_app/utils/constants/app_strings.dart';
 import 'package:ecommerce_app/utils/extensions/margin_extension.dart';
 import 'package:ecommerce_app/widgets/custom_svg.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../providers/login_provider.dart';
 import '../../utils/constants/app_colors.dart';
 import '../../utils/constants/app_text_styles.dart';
+import '../../widgets/common_snackbar.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 
@@ -63,12 +65,14 @@ class LoginScreen extends StatelessWidget {
                       return Column(
                         children: [
                           CustomTextField(
+                            controller: loginProvider.emailController,
                             label: AppStrings.emailAddress,
                             hintText: AppStrings.emailHint,
                             onChanged: loginProvider.setEmail,
                           ),
                           20.hBox,
                           CustomTextField(
+                            controller: loginProvider.passwordController,
                             label: AppStrings.password,
                             hintText: AppStrings.passwordHint,
                             isPassword: true,
@@ -98,8 +102,28 @@ class LoginScreen extends StatelessWidget {
                   Consumer<LoginProvider>(
                     builder: (context, loginProvider, child) {
                       return CustomButton(
+                        isLoading: loginProvider.isLoading,
+                        isEnabled:
+                            loginProvider.emailController.text.isNotEmpty &&
+                            loginProvider.passwordController.text.isNotEmpty,
                         text: AppStrings.login,
-                        onPressed: () {},
+                        onPressed: () async {
+                          await loginProvider.login().then((value) {
+                            print("value receiced $value");
+                            if (value) {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => HomeScreen(),
+                                ),
+                              );
+                            } else {
+                              SnackbarService.showSnackbar(
+                                "Login Failed",
+                                isError: true,
+                              );
+                            }
+                          });
+                        },
                       );
                     },
                   ),
