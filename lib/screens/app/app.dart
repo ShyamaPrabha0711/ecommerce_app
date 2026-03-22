@@ -1,7 +1,8 @@
 
+import 'package:ecommerce_app/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../login/login_screen.dart';
+import '../../utils/constants/app_strings.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -9,9 +10,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Ecommerce App',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: LoginScreen(),
+      title: AppStrings.appName,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Lufga',
+      ),
+      home: const LoginScreen()
     );
   }
 }

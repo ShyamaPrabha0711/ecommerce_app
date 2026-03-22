@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/screens/home/home_screen.dart';
 import 'package:ecommerce_app/utils/constants/app_strings.dart';
 import 'package:ecommerce_app/utils/extensions/margin_extension.dart';
 import 'package:ecommerce_app/widgets/custom_svg.dart';
@@ -99,7 +100,13 @@ class LoginScreen extends StatelessWidget {
                     builder: (context, loginProvider, child) {
                       return CustomButton(
                         text: AppStrings.login,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
