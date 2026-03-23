@@ -15,6 +15,7 @@ Dart: 3.10.1
 
 ```bash
 git clone https://github.com/ShyamaPrabha0711/ecommerce_app.git
+checkout in main or develop branch
 cd <project-folder>
 ```
 
